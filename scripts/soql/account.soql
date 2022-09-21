@@ -1,0 +1,46 @@
+// Use .soql files to store SOQL queries.
+// You can execute queries in VS Code by selecting the
+//     query text and running the command:
+//     SFDX: Execute SOQL Query with Currently Selected Text
+
+//parent to child  (when you call child object always put s )
+select Id, name, (select Name from Contacts), (select name from opportunities) from Account
+
+
+//child to parent
+
+select Id, name, Account.Name, Account.site from contact
+
+//write a soql query  that returns all the accounts without any contact
+
+//Id and AccountId is similar baglanma noktalari
+
+select id, Name from Account Where Id not in (select AccountId from Contact)
+
+
+/// create a query that returns all of the Account records with more than 100 employees and whose billing count
+//is not null
+select id, name, numberOfEmployees, BillingCountry from Account where numberOfEmployees >100
+ and BillingCountry!=null
+
+
+//Soql binding
+ String accountName='Red House';
+
+Account [] accList= [select id, name from Account where Name=:accountName];
+
+System.debug(accList);
+
+//
+
+for(Account acc: [select name from Account]){
+
+}
+
+
+
+
+
+
+
+
